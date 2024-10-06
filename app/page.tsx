@@ -1,8 +1,16 @@
 "use client"
 
+import { z } from "zod"
+
+const formSchema = z.object({
+  username: z.string().min(2).max(50),
+})
+
+
+
 export default function Home() {
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <main>
       <h1>TEST</h1>
     </main>
   );
