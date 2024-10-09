@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form"
 import { formSchema } from "@/lib/formSchema"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useCallback } from "react"
 
 export const useInquiryForm = () => {
   // Define the form
@@ -16,9 +17,9 @@ export const useInquiryForm = () => {
   })
 
   // Define a submit handler
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
     console.log(values)
-  }
+  },[])
 
   return {form, onSubmit};
 };
