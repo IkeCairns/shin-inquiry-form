@@ -17,8 +17,14 @@ export const useInquiryForm = () => {
   })
 
   // Define a submit handler
-  const onSubmit = useCallback((values: z.infer<typeof formSchema>) => {
-    console.log(values)
+  const onSubmit = useCallback(async(values: z.infer<typeof formSchema>) => {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send`, {
+        method: "POST",
+      })
+    } catch(err) {
+      console.error(err)
+    }
   },[])
 
   return {form, onSubmit};
