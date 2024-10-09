@@ -43,7 +43,12 @@ const InquiryForm = () => {
   
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form 
+        onSubmit={() => 
+          {form.handleSubmit(onSubmit)
+        }}
+        className="container flex flex-col gap-3"
+      >
         <FormField
           control={form.control}
           name="username"
