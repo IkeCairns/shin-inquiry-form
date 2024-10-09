@@ -1,17 +1,12 @@
 "use client"
 
-import { z } from "zod"
-
-const formSchema = z.object({
-  username: z.string().min(2).max(50),
-})
-
-
+import InquiryForm from "@/components/InquiryForm/InquiryForm"
 
 export default function Home() {
   return (
-    <main>
-      <h1>TEST</h1>
+    <main className="flex min-h-screen flex-col items-center p-24">
+      <h2 className="font-semibold text-2xl mb-4">お問合せフォーム</h2>
+      <InquiryForm />
     </main>
   );
 }
