@@ -9,15 +9,15 @@ export const formSchema = z.object({
     .max(50, {
       message: "Username must be under 50 characters."
     }),
-  subject:
-    z.string()
-    .min(2, {
-      message: "Subject must be at least 2 characters."
-    }),
   email:
     z.string()
     .email({
       message: "Email address must be appropriate."
+    }),
+  subject:
+    z.string()
+    .min(2, {
+      message: "Subject must be at least 2 characters."
     }),
   content:
     z.string()

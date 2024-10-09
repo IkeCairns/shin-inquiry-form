@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -9,13 +11,13 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Textarea } from '../ui/textarea'
 
 const InquiryForm = () => {
   // Define the form
@@ -23,6 +25,9 @@ const InquiryForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      email: "",
+      subject: "",
+      content: "",
     },
   })
 
@@ -34,9 +39,9 @@ const InquiryForm = () => {
   return (
     <Form {...form}>
       <form 
-        onSubmit={() => 
-          {form.handleSubmit(onSubmit)
-        }}
+        onSubmit={
+          form.handleSubmit(onSubmit)
+        }
         className="container flex flex-col gap-3"
       >
         <FormField
@@ -46,11 +51,47 @@ const InquiryForm = () => {
             <FormItem>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input placeholder="John Smith" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email Address</FormLabel>
+              <FormControl>
+                <Input placeholder="xxx@xxx.xxx" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="subject"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Subject</FormLabel>
+              <FormControl>
+                <Input placeholder="Subject" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="content"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Content</FormLabel>
+              <FormControl>
+                <Textarea placeholder="Content" {...field} />
+              </FormControl>
               <FormMessage />
             </FormItem>
           )}
