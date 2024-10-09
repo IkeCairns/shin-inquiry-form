@@ -2,11 +2,6 @@
 
 import React from 'react'
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
-
-import { formSchema } from '@/lib/formSchema'
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -18,24 +13,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from '../ui/textarea'
+import { useInquiryForm } from '@/hooks/useInquiryForm'
 
 const InquiryForm = () => {
-  // Define the form
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-      email: "",
-      subject: "",
-      content: "",
-    },
-  })
-
-  // Define a submit handler
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-  }
-  
+  const {form, onSubmit} = useInquiryForm();  
   return (
     <Form {...form}>
       <form 
