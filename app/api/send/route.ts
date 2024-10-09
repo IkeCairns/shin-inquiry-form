@@ -4,22 +4,29 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function POST() {
+export async function POST(request: Request) {
+  const {
+    username,
+    subject,
+    email,
+    content,
+  } = await request.json();
   try {
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: ["zxh03501@nifty.com"],
-      subject: "Test Email: ShinCode-inquiry",
+      subject: subject,
       react: EmailTemplate({
-        username: "testuser",
-        email: "xx@xx.xx",
-        content: "test content script"
+        username,
+        email,
+        content,
       }) as React.ReactElement
     });
     if (error) {
       return NextResponse.json({error});
     }
-    return NextResponse.json({data})
+    console.log(NextResponse.json({data}))
+    return NextResponse.json({data});
   } catch (error) {
     return NextResponse.json({error})
   }
