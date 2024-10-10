@@ -77,6 +77,24 @@ const InquiryForm = () => {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="file"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Attached File</FormLabel>
+              <FormControl>
+                <Input
+                  accept='image/*'
+                  type="file" 
+                  placeholder="Subject"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
