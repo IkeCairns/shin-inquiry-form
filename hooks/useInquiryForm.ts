@@ -13,6 +13,7 @@ export const useInquiryForm = () => {
       email: "",
       subject: "",
       content: "",
+      file: undefined,
     },
   })
 
@@ -22,21 +23,23 @@ export const useInquiryForm = () => {
       username,
       email,
       subject,
-      content
+      content,
+      file
     } = values
+
+    const formData = new FormData();
+
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("subject", subject);
+    formData.append("content", content);
+    formData.append("file", file[0]);
+
     try {
       await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send`, {
         method: "POST",
-        headers: {
-          "Content-Type": "appliation/json"
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          subject,
-          content
-        })
-      })
+        body: formData, 
+      });
     } catch(err) {
       console.error(err)
     }

@@ -5,12 +5,16 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: Request) {
-  const {
-    username,
-    subject,
-    email,
-    content,
-  } = await request.json();
+  const formData = await request.formData();
+
+  const username = formData.get("username")?.toString() as string;
+  const email = formData.get("email")?.toString() as string;
+  const subject = formData.get("subject")?.toString() as string;
+  const content = formData.get("content")?.toString() as string;
+  const file = formData.get("file") as File;
+
+  console.log({username, email, subject, content, file})
+
   try {
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
@@ -20,7 +24,8 @@ export async function POST(request: Request) {
         username,
         email,
         content,
-      }) as React.ReactElement
+      }) as React.ReactElement,
+      attachments: [{ filename: file.name, content: file }],
     });
     if (error) {
       return NextResponse.json({error});

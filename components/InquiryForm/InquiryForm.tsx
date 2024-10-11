@@ -80,15 +80,18 @@ const InquiryForm = () => {
         <FormField
           control={form.control}
           name="file"
-          render={({ field }) => (
+          render={({ field: {value, onChange, ...fieldProps} }) => (
             <FormItem>
               <FormLabel>Attached File</FormLabel>
               <FormControl>
                 <Input
-                  accept='image/*'
+                  accept="image/*"
                   type="file" 
                   placeholder="Subject"
-                  {...field}
+                  onChange={(e) => {
+                    onChange(e.target.files);
+                  }}
+                  {...fieldProps}
                 />
               </FormControl>
               <FormMessage />
