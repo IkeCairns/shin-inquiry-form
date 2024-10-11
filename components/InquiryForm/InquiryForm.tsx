@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Button } from "@/components/ui/button"
 import {
@@ -15,11 +15,21 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from '../ui/textarea'
 import { useInquiryForm } from '@/hooks/useInquiryForm'
 import { ClipLoader } from 'react-spinners'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const InquiryForm = () => {
   const {form, onSubmit} = useInquiryForm();  
+
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      toast.success('Thank you for your inquiry. We will get back to you soon.')    
+    }
+  }, [form.formState.isSubmitSuccessful]);
+
   return (
     <Form {...form}>
+      <ToastContainer />
       <form 
         onSubmit={
           form.handleSubmit(onSubmit)
