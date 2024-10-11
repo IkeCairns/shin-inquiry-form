@@ -25,7 +25,7 @@ const InquiryForm = () => {
     if (form.formState.isSubmitSuccessful) {
       toast.success('Thank you for your inquiry. We will get back to you soon.')    
     }
-  }, [form.formState.isSubmitSuccessful]);
+  }, [form.formState.isSubmitSuccessful])
 
   return (
     <Form {...form}>
