@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const content = formData.get("content")?.toString() as string;
   const file = formData.get("file") as File;
 
-  console.log({username, email, subject, content, file})
+  const buffer = Buffer.from(await file.arrayBuffer())
 
   try {
     const { data, error } = await resend.emails.send({
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         email,
         content,
       }) as React.ReactElement,
-      attachments: [{ filename: file.name, content: file }],
+      attachments: [{ filename: file.name, content: buffer }],
     });
     if (error) {
       return NextResponse.json({error});
