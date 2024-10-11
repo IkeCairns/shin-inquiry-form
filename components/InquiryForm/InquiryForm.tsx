@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from '../ui/textarea'
 import { useInquiryForm } from '@/hooks/useInquiryForm'
+import { ClipLoader } from 'react-spinners'
 
 const InquiryForm = () => {
   const {form, onSubmit} = useInquiryForm();  
@@ -98,7 +99,12 @@ const InquiryForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button 
+          type="submit"
+          disabled={form.formState.isSubmitting}
+        >
+          {form.formState.isSubmitting ? <ClipLoader color="white" size={20} />: "Submit"}
+        </Button>
       </form>
     </Form>
   )
